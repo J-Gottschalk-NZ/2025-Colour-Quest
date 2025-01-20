@@ -78,8 +78,11 @@ class StartGame:
         try:
             rounds_wanted = int(rounds_wanted)
             if rounds_wanted > 0:
-                # temporary success message, replace with call to PlayGame class
-                self.choose_label.config(text=f"You have chosen to play {rounds_wanted} round/s")
+                # Invoke Play Class (and take across number of rounds)
+                Play(rounds_wanted)
+                # Hide root window (ie: hide rounds choice window).
+                root.withdraw()
+
             else:
                 has_errors = "yes"
 
@@ -88,10 +91,25 @@ class StartGame:
 
         # display the error if necessary
         if has_errors == "yes":
-            self.choose_label.config(text=error, fg="#990000",
-                                     font=("Arial", "10", "bold"))
+            self.choose_label.config(text=error, fg="#990000", font=("Arial", "10", "bold"))
             self.num_rounds_entry.config(bg="#F4CCCC")
             self.num_rounds_entry.delete(0, END)
+
+
+class Play:
+    """
+    Interface for playing the Colour Quest Game
+    """
+
+    def __init__(self, how_many):
+        self.play_box = Toplevel()
+
+        self.game_frame = Frame(self.play_box)
+        self.game_frame.grid(padx=10, pady=10)
+
+        self.game_heading_label = Label(self.game_frame, text=f"Round 0 of {how_many}",
+                                        font=("Arial", "16", "bold"))
+        self.game_heading_label.grid(row=0)
 
 
 # main routine
