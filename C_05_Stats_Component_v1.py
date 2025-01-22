@@ -84,16 +84,11 @@ class Play:
 
     def to_stats(self):
         """
-        Displays stats for playing game
-        :return:
-        """
-        # Everything we need to generate our
-        # statistics in one master list.
-        rounds_won = self.rounds_won.get()
+        Retrieves everything we need to display the game / round statistics"""
 
         # IMPORTANT: retrieve number of rounds
         # won as a number (rather than the 'self' container)
-
+        rounds_won = self.rounds_won.get()
         stats_bundle = [rounds_won, self.all_scores_list,
                         self.all_medians_list, self.all_high_score_list]
 
